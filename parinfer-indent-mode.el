@@ -1,5 +1,20 @@
 (require 'cl-lib)
-(require 'parinfer-util)
+(require 'parinfer-string)
+(require 'parinfer-reader)
+
+(defvar parinfer-initial-state
+  "An initial state of our running state."
+  '((lines . ())
+    (postline-states . ())
+    (postindent-states . ())
+    (insert . ((line-dy . nil)
+	       (x-pos . nil)))
+    (line-no . -1)
+    (track-indent? . nil)
+    (delim-trail . ((start . nil)
+		    (end . nil)))
+    (stack . ())
+    (backup . ())))
 
 (defun close-delims (state &optional (indent-x 0))
   (let* (
@@ -12,7 +27,6 @@
 	 (line-no (+ (assoc 'line-no state) line-dy))
 	 
 	)
-
     )
   )
 
